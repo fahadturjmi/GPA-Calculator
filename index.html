@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="light" dir="rtl" lang="ar">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>حساب المعدل التراكمي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Manrope:wght@200..800&family=Outfit:wght@300..900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#FF3D55",
+              "primary-light": "#FFF0F2",
+              "text-main": "#1A1A1A",
+              "text-secondary": "#6B7280",
+              "background-light": "#F8FAFC",
+              "background-dark": "#1A1A2E",
+              "surface-light": "#ffffff",
+              "surface-dark": "#24243e",
+            },
+            fontFamily: {
+              // Manrope comes first to handle Latin characters/numbers, IBM Plex Sans Arabic handles Arabic
+              display: ["Manrope", "IBM Plex Sans Arabic", "sans-serif"],
+              body: ["Manrope", "IBM Plex Sans Arabic", "sans-serif"],
+              sans: ["Manrope", "IBM Plex Sans Arabic", "sans-serif"],
+              numbers: ["Outfit", "sans-serif"], // Specialized font for big numbers
+            },
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "1.5rem",
+              xl: "2rem",
+              "2xl": "2.5rem",
+              full: "9999px",
+            },
+            boxShadow: {
+              soft: "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
+              glow: "0 10px 30px -5px rgba(255, 61, 85, 0.3)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: none;
+      }
+      body {
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+      @media print {
+        .no-print {
+          display: none !important;
+        }
+        @page {
+          margin: 0;
+          size: auto;
+        }
+        body {
+          background-color: white !important;
+          color: black !important;
+        }
+        /* Override fixed positioning for the report container during print */
+        #report-view-container {
+          position: relative !important;
+          overflow: visible !important;
+          height: auto !important;
+          width: 100% !important;
+          background-color: white !important;
+          color: black !important;
+          z-index: auto !important;
+          padding: 0 !important;
+        }
+        /* Ensure background colors (like chart bars and table headers) print */
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "jspdf": "https://esm.sh/jspdf@^3.0.4",
+    "jspdf-autotable": "https://esm.sh/jspdf-autotable@^5.0.2",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "uuid": "https://esm.sh/uuid@^13.0.0",
+    "chart.js": "https://esm.sh/chart.js@4.4.1",
+    "react-chartjs-2": "https://esm.sh/react-chartjs-2@5.2.0?deps=react@19.2.3,chart.js@4.4.1"
+  }
+}
+</script>
+</head>
+  <body class="bg-background-light dark:bg-background-dark font-display text-text-main dark:text-gray-100 selection:bg-primary selection:text-white">
+    <div id="root"></div>
+  </body>
+</html>

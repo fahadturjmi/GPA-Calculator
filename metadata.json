@@ -1,0 +1,5 @@
+{
+  "name": "GPA Calculator Pro",
+  "description": "An interactive, mobile-first Arabic GPA calculator with PDF export functionality.",
+  "requestFramePermissions": []
+}
