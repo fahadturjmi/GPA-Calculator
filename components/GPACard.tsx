@@ -16,7 +16,7 @@ export const GPACard: React.FC<GPACardProps> = ({ result, scale, setScale }) => 
             المعدل التراكمي الحالي
           </p>
           <div className="flex items-baseline justify-center w-full">
-            <h1 className="font-numbers text-8xl font-bold tracking-tight text-text-main dark:text-white">
+            <h1 className="font-numbers text-8xl font-bold tracking-tight text-blue-700 dark:text-blue-400">
               {result.gpa.toFixed(2)}
             </h1>
           </div>

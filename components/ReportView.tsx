@@ -41,8 +41,8 @@ export const ReportView: React.FC<ReportViewProps> = ({ courses, result, scale, 
             const gradeInfo = GRADE_OPTIONS.find(g => g.label === c.gradeLabel);
             return scale === '4.0' ? gradeInfo?.value4 || 0 : gradeInfo?.value5 || 0;
         }),
-        backgroundColor: 'rgba(255, 61, 85, 0.6)',
-        borderColor: 'rgba(255, 61, 85, 1)',
+        backgroundColor: 'rgba(29, 78, 216, 0.6)', // Blue-700 with opacity
+        borderColor: 'rgba(29, 78, 216, 1)', // Blue-700
         borderWidth: 1,
         borderRadius: 4,
       },
@@ -64,7 +64,8 @@ export const ReportView: React.FC<ReportViewProps> = ({ courses, result, scale, 
             color: 'rgba(0, 0, 0, 0.05)'
         },
         ticks: {
-            font: chartFont
+            font: chartFont,
+            color: '#1d4ed8' // Blue-700
         }
       },
       x: {
@@ -128,7 +129,7 @@ export const ReportView: React.FC<ReportViewProps> = ({ courses, result, scale, 
                 </div>
                 <div className="text-left">
                      <p className="font-bold text-gray-900">نظام المعدل</p>
-                     <p className="font-numbers text-primary text-xl font-bold dir-ltr">/ {scale}</p>
+                     <p className="font-numbers text-blue-700 text-xl font-bold dir-ltr">/ {scale}</p>
                 </div>
             </div>
         </div>
@@ -137,7 +138,7 @@ export const ReportView: React.FC<ReportViewProps> = ({ courses, result, scale, 
         <div className="mb-10 grid grid-cols-3 gap-6">
             <div className="rounded-xl bg-gray-50 p-6 border border-gray-100 text-center">
                 <p className="text-sm font-medium text-gray-500 mb-2">المعدل التراكمي</p>
-                <p className="font-numbers text-4xl font-extrabold text-primary">{result.gpa.toFixed(2)}</p>
+                <p className="font-numbers text-4xl font-extrabold text-blue-700">{result.gpa.toFixed(2)}</p>
             </div>
             <div className="rounded-xl bg-gray-50 p-6 border border-gray-100 text-center">
                 <p className="text-sm font-medium text-gray-500 mb-2">التقدير العام</p>
@@ -145,7 +146,7 @@ export const ReportView: React.FC<ReportViewProps> = ({ courses, result, scale, 
             </div>
             <div className="rounded-xl bg-gray-50 p-6 border border-gray-100 text-center">
                 <p className="text-sm font-medium text-gray-500 mb-2">إجمالي الساعات</p>
-                <p className="font-numbers text-2xl font-bold text-gray-800 mt-1">{result.totalCredits}</p>
+                <p className="font-numbers text-2xl font-bold text-blue-700 mt-1">{result.totalCredits}</p>
             </div>
         </div>
 
@@ -173,9 +174,9 @@ export const ReportView: React.FC<ReportViewProps> = ({ courses, result, scale, 
                          return (
                             <tr key={course.id}>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{course.name || '-'}</td>
-                                <td className="font-numbers px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">{course.credits}</td>
+                                <td className="font-numbers px-6 py-4 whitespace-nowrap text-center text-sm text-blue-700 font-medium">{course.credits}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-bold text-gray-900 dir-ltr">{course.gradeLabel}</td>
-                                <td className="font-numbers px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">{points}</td>
+                                <td className="font-numbers px-6 py-4 whitespace-nowrap text-center text-sm text-blue-700 font-medium">{points}</td>
                             </tr>
                         );
                     })}
