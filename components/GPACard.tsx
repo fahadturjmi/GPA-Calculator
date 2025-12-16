@@ -12,11 +12,11 @@ export const GPACard: React.FC<GPACardProps> = ({ result, scale, setScale }) => 
     <>
       <div className="relative w-full overflow-hidden rounded-3xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800 p-8 text-center shadow-soft">
         <div className="relative flex flex-col items-center justify-center gap-3">
-          <p className="text-sm font-medium text-text-secondary dark:text-gray-400">
+          <p className="text-xl font-bold text-text-secondary dark:text-gray-400">
             المعدل التراكمي الحالي
           </p>
           <div className="flex items-baseline justify-center w-full">
-            <h1 className="font-numbers text-8xl font-bold tracking-tight text-blue-700 dark:text-blue-400">
+            <h1 className="font-numbers text-8xl font-bold tracking-tight text-black dark:text-white">
               {result.gpa.toFixed(2)}
             </h1>
           </div>

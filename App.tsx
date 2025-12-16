@@ -79,7 +79,7 @@ const App: React.FC = () => {
                 {darkMode ? 'light_mode' : 'dark_mode'}
               </span>
             </button>
-            <h2 className="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center text-text-main dark:text-white">
+            <h2 className="text-2xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center text-text-main dark:text-white">
               حساب المعدل التراكمي
             </h2>
             <button
@@ -131,6 +131,12 @@ const App: React.FC = () => {
               </div>
             </div>
             
+            <div className="mt-8 text-center">
+              <p className="text-sm font-bold text-gray-300 dark:text-gray-700">
+                جميع الحقوق محفوظة - تطوير : فهد الترجمي ، 2026
+              </p>
+            </div>
+
             <div className="h-24"></div>
           </main>
 
