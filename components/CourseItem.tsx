@@ -10,103 +10,91 @@ interface CourseItemProps {
 
 export const CourseItem: React.FC<CourseItemProps> = ({ course, onUpdate, onRemove }) => {
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-300 hover:border-primary/30 hover:shadow-lg dark:border-gray-700 dark:bg-surface-dark">
+    <div className="group relative isolate flex flex-col gap-4 overflow-hidden rounded-[2rem] bg-white p-5 shadow-sm transition-all duration-300 hover:shadow-lg dark:bg-surface-dark border border-gray-100 dark:border-white/5 ring-1 ring-black/5 dark:ring-white/5">
       
-      {/* Decorative Side Strip */}
-      <div className="absolute right-0 top-0 h-full w-1.5 bg-gray-100 transition-colors duration-300 group-hover:bg-primary dark:bg-gray-800"></div>
+      {/* Decorative gradient blob background (Subtle) */}
+      <div className="absolute -right-10 -top-10 -z-10 size-40 rounded-full bg-primary/5 blur-3xl transition-opacity group-hover:opacity-100 opacity-50"></div>
 
-      <div className="flex flex-col gap-4 p-5 pr-6"> {/* Added padding-right to account for strip */}
+      {/* Top Row: Icon + Name Input + Delete */}
+      <div className="flex items-center gap-3">
+        {/* Icon Placeholder */}
+        <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-gray-50 text-gray-400 dark:bg-white/5 dark:text-gray-500 group-focus-within:bg-primary/10 group-focus-within:text-primary transition-colors">
+          <span className="material-symbols-outlined text-2xl">menu_book</span>
+        </div>
+
+        {/* Course Name Input */}
+        <div className="relative flex-1">
+          <input
+            className="peer w-full border-none bg-transparent p-0 text-lg font-bold text-text-main placeholder-gray-300 focus:ring-0 dark:text-white dark:placeholder-gray-600"
+            placeholder="اسم المادة..."
+            type="text"
+            value={course.name}
+            onChange={(e) => onUpdate(course.id, 'name', e.target.value)}
+          />
+          <span className="absolute -bottom-1 right-0 h-0.5 w-0 bg-primary transition-all duration-300 peer-focus:w-full"></span>
+        </div>
+
+        {/* Delete Button */}
+        <button
+          onClick={() => onRemove(course.id)}
+          className="flex size-9 shrink-0 items-center justify-center rounded-full text-gray-300 hover:bg-red-50 hover:text-red-500 transition-colors dark:text-gray-600 dark:hover:bg-red-500/20 dark:hover:text-red-400 no-print"
+          title="حذف المادة"
+        >
+          <span className="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      {/* Divider */}
+      <div className="h-px w-full bg-gray-100 dark:bg-white/5"></div>
+
+      {/* Bottom Row: Controls */}
+      <div className="grid grid-cols-2 gap-3">
         
-        {/* Top Section: Name Input & Delete Button */}
-        <div className="flex items-start gap-4">
-          <div className="relative flex-1">
-            <label className="mb-1.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-gray-400">
-              <span className="material-symbols-outlined text-[14px]">edit_note</span>
-              اسم المادة
-            </label>
-            <div className="relative overflow-hidden rounded-xl bg-gray-50 transition-colors focus-within:bg-blue-50/50 focus-within:ring-1 focus-within:ring-blue-200 dark:bg-black/20 dark:focus-within:bg-white/5 dark:focus-within:ring-white/10">
-              <input
-                className="w-full bg-transparent px-4 py-3 text-base font-bold text-text-main placeholder-gray-300 focus:outline-none dark:text-white dark:placeholder-gray-600"
-                placeholder="مثال: رياضيات 101"
-                type="text"
-                value={course.name}
-                onChange={(e) => onUpdate(course.id, 'name', e.target.value)}
-              />
-            </div>
+        {/* Grade Selector */}
+        <div className="relative">
+          <div className={`flex h-12 w-full items-center justify-between rounded-xl px-4 transition-all duration-200 border border-transparent ${course.gradeLabel ? 'bg-primary-light/50 text-primary dark:bg-primary/10' : 'bg-gray-50 text-gray-400 dark:bg-white/5'}`}>
+            <span className="text-[10px] font-bold uppercase tracking-wider absolute -top-2 right-3 bg-white px-1 dark:bg-surface-dark text-gray-400">التقدير</span>
+            <span className="font-bold truncate text-sm dir-ltr w-full text-left">
+              {course.gradeLabel || 'اختر'}
+            </span>
+            <span className="material-symbols-outlined text-lg opacity-50 absolute left-3">expand_more</span>
           </div>
-
-          <button
-            onClick={() => onRemove(course.id)}
-            className="mt-6 flex size-10 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-400 transition-colors hover:bg-red-500 hover:text-white dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500 dark:hover:text-white no-print"
-            title="حذف المادة"
+          <select
+            className="absolute inset-0 size-full cursor-pointer opacity-0"
+            value={course.gradeLabel}
+            onChange={(e) => onUpdate(course.id, 'gradeLabel', e.target.value)}
           >
-            <span className="material-symbols-outlined text-[20px]">delete</span>
-          </button>
+            <option disabled value="">اختر الدرجة</option>
+            {GRADE_OPTIONS.map((opt) => (
+              <option key={opt.label} value={opt.label}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
         </div>
 
-        {/* Bottom Section: Inputs Grid */}
-        <div className="grid grid-cols-5 gap-3">
-          
-          {/* Grade Selector (Takes 3 columns) */}
-          <div className="col-span-3">
-            <label className="mb-1.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-gray-400">
-              <span className="material-symbols-outlined text-[14px]">stars</span>
-              التقدير
-            </label>
-            <div className="relative h-12 rounded-xl bg-gray-50 transition-all focus-within:bg-primary-light/20 focus-within:ring-1 focus-within:ring-primary/30 hover:bg-gray-100 dark:bg-black/20 dark:hover:bg-black/30 dark:focus-within:bg-primary/10">
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-3">
-                <span className={`font-bold ${course.gradeLabel ? 'text-text-main dark:text-white' : 'text-gray-400'}`}>
-                   {course.gradeLabel ? (
-                      <span className="dir-ltr inline-block">{course.gradeLabel}</span>
-                   ) : (
-                      'اختر'
-                   )}
-                </span>
-                <span className="material-symbols-outlined text-gray-400">expand_more</span>
-              </div>
-              <select
-                className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-                value={course.gradeLabel}
-                onChange={(e) => onUpdate(course.id, 'gradeLabel', e.target.value)}
-              >
-                <option disabled value="">اختر الدرجة</option>
-                {GRADE_OPTIONS.map((opt) => (
-                  <option key={opt.label} value={opt.label}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+        {/* Credits Selector */}
+        <div className="relative">
+          <div className="flex h-12 w-full items-center justify-between rounded-xl bg-gray-50 px-4 dark:bg-white/5 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-colors">
+            <span className="text-[10px] font-bold uppercase tracking-wider absolute -top-2 right-3 bg-white px-1 dark:bg-surface-dark text-gray-400">الساعات</span>
+            <span className="font-numbers text-lg font-bold text-text-main dark:text-white">
+              {course.credits}
+            </span>
+            <span className="material-symbols-outlined text-lg text-gray-400 absolute left-3">unfold_more</span>
           </div>
-
-          {/* Credits Selector (Takes 2 columns) */}
-          <div className="col-span-2">
-            <label className="mb-1.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-gray-400">
-              <span className="material-symbols-outlined text-[14px]">schedule</span>
-              الساعات
-            </label>
-            <div className="relative h-12 rounded-xl bg-gray-50 transition-all focus-within:bg-primary-light/20 focus-within:ring-1 focus-within:ring-primary/30 hover:bg-gray-100 dark:bg-black/20 dark:hover:bg-black/30 dark:focus-within:bg-primary/10">
-              <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-3">
-                <span className="font-numbers text-lg font-bold text-text-main dark:text-white">
-                  {course.credits}
-                </span>
-                <span className="material-symbols-outlined text-gray-400">unfold_more</span>
-              </div>
-              <select
-                className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-                value={course.credits}
-                onChange={(e) => onUpdate(course.id, 'credits', Number(e.target.value))}
-              >
-                {HOURS_OPTIONS.map((h) => (
-                  <option key={h} value={h}>
-                    {h}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
+          <select
+            className="absolute inset-0 size-full cursor-pointer opacity-0"
+            value={course.credits}
+            onChange={(e) => onUpdate(course.id, 'credits', Number(e.target.value))}
+          >
+            {HOURS_OPTIONS.map((h) => (
+              <option key={h} value={h}>
+                {h}
+              </option>
+            ))}
+          </select>
         </div>
+
       </div>
     </div>
   );
