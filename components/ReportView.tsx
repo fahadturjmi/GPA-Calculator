@@ -119,7 +119,7 @@ export const ReportView: React.FC<ReportViewProps> = ({ courses, result, scale, 
       </header>
 
       {/* Main Content */}
-      <main className="flex flex-col gap-6 px-5 pt-2 print:p-8 print:block print:h-screen print:overflow-hidden">
+      <main className="flex flex-col gap-6 px-5 pt-2 print:p-8 print:flex print:flex-col print:h-screen print:overflow-hidden">
         
         {/* Printable Header - Professional Look */}
         <div className="hidden print:flex items-center justify-between mb-8 border-b-2 border-primary/20 pb-6">
